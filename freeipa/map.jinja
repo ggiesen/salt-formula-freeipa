@@ -34,6 +34,9 @@ Debian:
   ldap_conf: /etc/openldap/ldap.conf
   sssd_conf: /etc/sssd/sssd.conf
   named_conf: /etc/bind/named.conf
+  named_custom_conf: /etc/bind/ipa-ext.conf
+  named_logging_options_conf: /etc/bind/ipa-logging-ext.conf
+  named_custom_options_conf:/etc/bind/ipa-options-ext.conf
 RedHat:
   pkgs:
   {% if grains.os == 'Fedora' %}
@@ -47,6 +50,9 @@ RedHat:
   ldap_conf: /etc/openldap/ldap.conf
   sssd_conf: /etc/sssd/sssd.conf
   named_conf: /etc/named.conf
+  named_custom_conf: /etc/named/ipa-ext.conf
+  named_logging_options_conf: /etc/named/ipa-logging-ext.conf
+  named_custom_options_conf: /etc/named/ipa-options-ext.conf
 {%- endload %}
 
 {%- set server = salt['grains.filter_by'](server_defaults, merge=salt['pillar.get']('freeipa:server')) %}

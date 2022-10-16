@@ -21,6 +21,45 @@ named_config:
     - watch_in:
       - service: named_service
 
+named_custom_config:
+  file.managed:
+    - name: {{ server.named_custom_conf }}
+    - source: salt://freeipa/files/ipa-ext.conf
+    - template: jinja
+    - owner: root
+    - group: named
+    - mode: 640
+    - require:
+      - cmd: freeipa_server_install
+    - watch_in:
+      - service: named_service
+
+named_logging_options_config:
+  file.managed:
+    - name: {{ server.named_logging_options_conf }}
+    - source: salt://freeipa/files/ipa-logging-ext.conf
+    - template: jinja
+    - owner: root
+    - group: named
+    - mode: 640
+    - require:
+      - cmd: freeipa_server_install
+    - watch_in:
+      - service: named_service
+
+named_ext_options_config:
+  file.managed:
+    - name: {{ server.named_custom_options_conf }}
+    - source: salt://freeipa/files/ipa-options-ext.conf
+    - template: jinja
+    - owner: root
+    - group: named
+    - mode: 640
+    - require:
+      - cmd: freeipa_server_install
+    - watch_in:
+      - service: named_service
+
 freeipa_zones_dir:
   file.directory:
     - name: /var/lib/ipa/zones
